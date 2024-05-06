@@ -21,9 +21,9 @@ int main()
 {
     vector<vector<char>> maze = {
         {'S', '.', '#', '#', '#'},
-        {'.', '.', '.', '.', '#'},
-        {'#', '#', '.', '#', '#'},
-        {'.', '.', '.', '.', 'E'}};
+        {'#', '.', '.', '#', '#'},
+        {'#', '#', '.', '.', '#'},
+        {'#', '#', '#', '.', 'E'}};
 
     int satr = 0;
     int sutun = 0;
@@ -35,67 +35,80 @@ int main()
 
     while (!efa)
     {
-        cout << "Enter your move (l-left, r-right, u-up, d-down): ";
-        cin >> move;
-
-        if (move == 'l' && sutun > 0)
+        char harakat[4] = {'l', 'r', 'u', 'd'};
+        for (int i = 0; i <= 4; i++)
         {
-            sutun--;
-            system("cls");
-        }
-        else if (move == 'r' && sutun < maze[0].size() - 1)
-        {
-            sutun++;
-            system("cls");
-        }
-        else if (move == 'u' && satr > 0)
-        {
-            satr--;
-            system("cls");
-        }
-        else if (move == 'd' && satr < maze.size() - 1)
-        {
-            satr++;
-            system("cls");
-        }
-        else
-        {
-            cout << "try again!" << endl;
-            continue;
-        }
-
-        if (maze[satr][sutun] == 'E')
-        {
-            efa = true;
-        }
-        if (maze[satr][sutun] != '#')
-        {
-            maze[satr][sutun] = 'P';
-        }
-        else
-        {
-            if (move == 'l')
+            move = harakat[i];
+            if (i == 1)
             {
-                sutun++;
+                system("pause");
             }
-            else if (move == 'r' )
+
+            if (move == 'l' && sutun > 0)
             {
                 sutun--;
+                system("cls");
             }
-            else if (move == 'u')
+            else if (move == 'r' && sutun < maze[0].size() - 1)
             {
-                satr++;
+                sutun++;
+                system("cls");
             }
-            else if (move == 'd')
+            else if (move == 'u' && satr > 0)
             {
                 satr--;
+                system("cls");
             }
-            printMaze(maze);
-            cout << "try again!\n";
-            continue;
-        }
+            else if (move == 'd' && satr < maze.size() - 1)
+            {
+                satr++;
+                system("cls");
+            }
+            else
+            {
+                cout << "try again!" << endl;
+                system("cls");
+                printMaze(maze);
 
-        printMaze(maze);
+                continue;
+            }
+
+            if (maze[satr][sutun] == 'E')
+            {
+                efa = true;
+            }
+            if (maze[satr][sutun] != '#')
+            {
+                maze[satr][sutun] = 'P';
+            }
+            else
+            {
+                if (move == 'l')
+                {
+                    sutun++;
+                }
+                else if (move == 'r')
+                {
+                    sutun--;
+                }
+                else if (move == 'u')
+                {
+                    satr++;
+                }
+                else if (move == 'd')
+                {
+                    satr--;
+                }
+                printMaze(maze);
+                cout << "try again!\n";
+                system("cls");
+                printMaze(maze);
+
+                continue;
+            }
+
+            printMaze(maze);
+        }
     }
 
     cout << "Congratulations, you have found the way." << endl;
